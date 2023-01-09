@@ -1,11 +1,13 @@
 import React from "react";
 import styled from "styled-components";
+import { auth } from "../../Login/components/firebase";
 
 const Nav = ({ libraryStatus, setlibraryStatus }) => {
   return (
     <NavContainer>
       <H1 libraryStatus={libraryStatus}>Vibs</H1>
       <Button onClick={() => setlibraryStatus(!libraryStatus)}>Libary</Button>
+      <button onClick={() => auth.signOut()}>Sign out</button>
     </NavContainer>
   );
 };

@@ -4,6 +4,7 @@ import styled from "styled-components";
 import Nav from "./components/Nav";
 import Song from "./components/Song";
 import Player from "./components/Player";
+import Library from "./components/Library";
 
 import data from "../data/data";
 
@@ -13,6 +14,7 @@ const Home = () => {
 
   //state
   const [libraryStatus, setlibraryStatus] = useState(false);
+  //get data的值
   const [songs, setSongs] = useState(data());
   const [currentSong, setCurrentSong] = useState(songs[0]);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -21,7 +23,9 @@ const Home = () => {
     duration: 0,
   });
 
+  //e是事件物件
   const updateTimeHandler = (e) => {
+    //紀錄時間
     const currentTime = e.target.currentTime;
     const duration = e.target.duration;
     //...展開運算子
@@ -43,6 +47,15 @@ const Home = () => {
         songs={songs}
         setSongs={setSongs}
       />
+      <Library
+        songs={songs}
+        setCurrentSong={setCurrentSong}
+        audioRef={audioRef}
+        isPlaying={isPlaying}
+        setSongs={setSongs}
+        libraryStatus={libraryStatus}
+      />
+      {/*audio 隨時更新S */}
       <audio
         onLoadedMetadata={updateTimeHandler}
         onTimeUpdate={updateTimeHandler}
@@ -67,3 +80,11 @@ const AppContainer = styled.div`
 `;
 
 export default Home;
+
+//需要實現技術
+/*
+  react
+  redux
+  mongodb
+
+*/

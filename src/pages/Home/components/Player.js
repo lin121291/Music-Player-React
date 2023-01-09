@@ -32,7 +32,7 @@ const Player = ({
   const playSongHandler = () => {
     if (isPlaying) {
       audioRef.current.pause();
-      //set state 停止
+      //set state 停止 並且會re render
       setIsPlaying(!isPlaying);
     } else {
       audioRef.current.play();
@@ -50,7 +50,9 @@ const Player = ({
   return (
     <PlayerContainer>
       <TimeControlContainer>
+        {/* player左邊的時間 抓當前更新的時間 */}
         <P>{getTime(songInfo.currentTime || 0)}</P>
+        {/* 中間的進度條 */}
         <Track currentSong={currentSong}>
           <Input
             onChange={dragHandler}
@@ -61,10 +63,11 @@ const Player = ({
           />
           <AnimateTrack songInfo={songInfo}></AnimateTrack>
         </Track>
-
+        {/*player左邊總時間 */}
         <P>{getTime(songInfo.duration || 0)}</P>
       </TimeControlContainer>
 
+      {/*底下的撥放鍵 */}
       <PlayerContainer>
         <FontAwesomeIcon
           onClick={playSongHandler}
